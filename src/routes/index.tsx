@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Bell, ChevronLeft, Delete, Eye, EyeOff, Gift, Smartphone, X } from "lucide-react";
 import { type SVGProps, useState } from "react";
 
@@ -161,6 +161,16 @@ function Index() {
   const [toastVisible, setToastVisible] = useState(true);
   const [balanceVisible, setBalanceVisible] = useState(false);
   const [pinOpen, setPinOpen] = useState(false);
+  const [transferLoading, setTransferLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const goToTransfer = () => {
+    setTransferLoading(true);
+    setTimeout(() => {
+      setTransferLoading(false);
+      void navigate({ to: "/transfer" });
+    }, 1200);
+  };
 
   return (
     <main
