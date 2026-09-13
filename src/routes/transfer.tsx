@@ -146,7 +146,8 @@ function TransferPage() {
                   dir="rtl"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value.replace(/\D/g, ""))}
-                  className="w-[110px] bg-transparent text-[28px] font-black leading-none outline-none"
+                  style={{ width: amount ? `${amount.length + 0.5}ch` : "0px" }}
+                  className="bg-transparent text-[28px] font-black leading-none outline-none transition-[width]"
                   aria-label="المبلغ"
                 />
               </div>
