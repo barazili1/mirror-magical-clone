@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Bell, ChevronLeft, Gift, Smartphone, X } from "lucide-react";
+import { Bell, ChevronLeft, Delete, Gift, Smartphone, X, Zap } from "lucide-react";
 import { type SVGProps, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import electricSahlIcon from "@/assets/icon-electric-sahl.png";
-import electricIcon from "@/assets/icon-electric.png";
-import gasNewIcon from "@/assets/icon-gas-new.png";
-import gasIcon from "@/assets/icon-gas.png";
+import electricSahlIcon from "@/assets/icon-electric-sahl.asset.json";
+import electricIcon from "@/assets/icon-electric.asset.json";
+import gasNewIcon from "@/assets/icon-gas-new.asset.json";
+import gasIcon from "@/assets/icon-gas.asset.json";
 import offerBanner from "@/assets/offer-banner.jpg";
-import prosecutionIcon from "@/assets/icon-prosecution.png";
+import prosecutionIcon from "@/assets/icon-prosecution.asset.json";
 
 // No head() here: the home route inherits title/description/og/twitter from
 // __root.tsx, and ships no og:image so serve-time hosting can inject the
@@ -149,16 +149,17 @@ const shortcuts = [
 ];
 
 const services = [
-  { label: "النيابة العامة", img: prosecutionIcon },
-  { label: "كارت الكهرباء", img: electricSahlIcon },
-  { label: "كارت الغاز", img: gasNewIcon },
-  { label: "كهرباء", img: electricIcon },
-  { label: "غاز", img: gasIcon },
+  { label: "النيابة العامة", img: prosecutionIcon.url },
+  { label: "كارت الكهرباء", img: electricSahlIcon.url },
+  { label: "كارت الغاز", img: gasNewIcon.url },
+  { label: "كهرباء", img: electricIcon.url },
+  { label: "غاز", img: gasIcon.url },
 ];
 
 function Index() {
   const [toastVisible, setToastVisible] = useState(true);
   const [balanceVisible, setBalanceVisible] = useState(false);
+  const [pinOpen, setPinOpen] = useState(false);
 
   return (
     <main
@@ -216,9 +217,15 @@ function Index() {
               <Button
                 variant="ghost"
                 aria-label="إظهار الرصيد"
-                onClick={() => setBalanceVisible((value) => !value)}
+                onClick={() => {
+                  if (balanceVisible) {
+                    setBalanceVisible(false);
+                  } else {
+                    setPinOpen(true);
+                  }
+                }}
               >
-                <EyeIcon className="size-8" />
+                <EyeIcon className="size-6" />
               </Button>
               <span className="h-7 w-px bg-primary-foreground/30" />
               <Button variant="ghost" aria-label="مسح رمز">
@@ -312,6 +319,16 @@ function Index() {
         </div>
       )}
 
+      {pinOpen && (
+        <PinSheet
+          onClose={() => setPinOpen(false)}
+          onComplete={() => {
+            setPinOpen(false);
+            setBalanceVisible(true);
+          }}
+        />
+      )}
+
       <nav
         className="fixed bottom-0 left-1/2 z-20 flex h-[66px] w-full max-w-[430px] -translate-x-1/2 items-center justify-around bg-panel px-3 shadow-[0_-4px_18px_color-mix(in_oklab,var(--foreground)_8%,transparent)]"
         aria-label="التنقل الرئيسي"
@@ -330,5 +347,97 @@ function Index() {
         </Button>
       </nav>
     </main>
+  );
+}
+
+function PinSheet({
+  onClose,
+  onComplete,
+}: {
+  onClose: () => void;
+  onComplete: () => void;
+}) {
+  const [pin, setPin] = useState("");
+
+  const press = (digit: string) => {
+    if (pin.length >= 6) return;
+    const next = pin + digit;
+    setPin(next);
+    if (next.length === 6) {
+      setTimeout(onComplete, 250);
+    }
+  };
+
+  const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+  return (
+    <div className="fixed inset-0 z-50 mx-auto flex max-w-[430px] flex-col justify-end">
+      <button
+        type="button"
+        aria-label="إغلاق"
+        className="absolute inset-0 h-full w-full cursor-default bg-black/60"
+        onClick={onClose}
+      />
+      <div className="relative flex h-[94%] flex-col items-center rounded-t-[28px] bg-[#f2f2f4] px-6 pt-10 text-foreground">
+        <div className="flex flex-col items-center">
+          <div className="relative text-alert">
+            <Smartphone size={52} strokeWidth={1.6} />
+            <Zap
+              size={22}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/3"
+              fill="currentColor"
+              strokeWidth={0}
+            />
+          </div>
+          <span className="mt-1 text-[22px] font-black italic text-alert">كاش</span>
+        </div>
+
+        <h2 className="mt-8 text-[26px] font-black">ادخل رقم المحفظة السري</h2>
+
+        <div className="mt-6 flex flex-row-reverse gap-3.5" dir="ltr">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <span
+              key={i}
+              className={`size-[18px] rounded-full ${
+                i < pin.length ? "bg-foreground/70" : "bg-foreground/25"
+              }`}
+            />
+          ))}
+        </div>
+
+        <button type="button" className="mt-6 text-[19px] font-medium text-alert">
+          نسيت الرقم السري؟
+        </button>
+
+        <div className="mt-auto grid w-full max-w-[340px] grid-cols-3 gap-x-6 gap-y-4 pb-10" dir="ltr">
+          {keys.map((digit) => (
+            <button
+              key={digit}
+              type="button"
+              onClick={() => press(digit)}
+              className="grid size-[76px] place-items-center justify-self-center rounded-full bg-white text-[30px] font-medium shadow-sm transition-transform active:scale-95"
+            >
+              {digit}
+            </button>
+          ))}
+          <span />
+          <button
+            type="button"
+            onClick={() => press("0")}
+            className="grid size-[76px] place-items-center justify-self-center rounded-full bg-white text-[30px] font-medium shadow-sm transition-transform active:scale-95"
+          >
+            0
+          </button>
+          <button
+            type="button"
+            aria-label="مسح"
+            onClick={() => setPin((value) => value.slice(0, -1))}
+            className="grid size-[76px] place-items-center justify-self-center rounded-full text-foreground transition-transform active:scale-95"
+          >
+            <Delete size={34} />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
