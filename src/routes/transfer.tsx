@@ -114,13 +114,13 @@ function TransferPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-2 pb-3">
+              <div dir="ltr" className="flex flex-row-reverse justify-center gap-2 pb-3">
                 {[50, 100, 200].map((value) => (
                   <button
                     key={value}
                     type="button"
                     onClick={() => addAmount(value)}
-                    className="flex h-[40px] items-center justify-center gap-1 rounded-full border border-foreground/15 bg-white text-[13px] font-bold"
+                    className="flex h-[40px] items-center justify-center gap-1 rounded-full border border-foreground/15 bg-white px-3 text-[13px] font-bold"
                   >
                     <span className="text-alert">+</span>
                     <span>{value}</span>
