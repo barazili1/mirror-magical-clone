@@ -9,6 +9,7 @@ import gasNewIcon from "@/assets/icon-gas-new.asset.json";
 import gasIcon from "@/assets/icon-gas.asset.json";
 import offerBanner from "@/assets/offer-banner.jpg";
 import prosecutionIcon from "@/assets/icon-prosecution.asset.json";
+import vodafoneCashLogo from "@/assets/vodafone-cash-logo.png.asset.json";
 
 // No head() here: the home route inherits title/description/og/twitter from
 // __root.tsx, and ships no og:image so serve-time hosting can inject the
@@ -101,27 +102,6 @@ function ServicesIcon(props: IconProps) {
       <rect x="6" y="26" width="16" height="16" rx="2" />
       <rect x="26" y="26" width="16" height="16" rx="2" />
       <path d="M14 10v8m-4-4h8M30 14h8M10 34h8m-4-4v8M31 31l6 6m0-6-6 6" />
-    </svg>
-  );
-}
-
-function VodafoneCashLogo(props: IconProps) {
-  return (
-    <svg
-      viewBox="0 0 70 90"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.6}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <rect x="23" y="4" width="24" height="42" rx="5" />
-      <rect x="27" y="10" width="16" height="28" rx="2" />
-      <circle cx="35" cy="40" r="2" fill="currentColor" />
-      <path d="M23 16c-8 2-13 8-11 16 1 5 6 8 10 8" />
-      <path d="M47 16c8 2 13 8 11 16-1 5-6 8-10 8" />
-      <path d="M28 46l7 14 7-14" />
     </svg>
   );
 }
@@ -399,13 +379,18 @@ function PinSheet({
         className="absolute inset-0 h-full w-full cursor-default bg-black/60"
         onClick={onClose}
       />
-      <div className="relative flex h-[94%] flex-col items-center rounded-t-[28px] bg-[#f2f2f4] px-6 pt-10 text-foreground">
+      <div className="relative flex h-full flex-col items-center rounded-t-[28px] bg-[#f2f2f4] px-6 pt-12 text-foreground">
         <div className="flex flex-col items-center">
-          <VodafoneCashLogo className="size-[70px] text-alert" />
-          <span className="mt-1 text-[22px] font-black italic text-alert">كاش</span>
+          <img
+            src={vodafoneCashLogo.url}
+            alt="كاش"
+            width={90}
+            height={110}
+            className="h-[110px] w-auto object-contain"
+          />
         </div>
 
-        <h2 className="mt-8 text-[26px] font-black">ادخل رقم المحفظة السري</h2>
+        <h2 className="mt-10 text-[26px] font-black">ادخل رقم المحفظة السري</h2>
 
         <div className="mt-6 flex flex-row-reverse gap-3.5" dir="ltr">
           {Array.from({ length: 6 }).map((_, i) => (
