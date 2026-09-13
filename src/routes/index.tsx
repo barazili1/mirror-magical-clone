@@ -407,13 +407,13 @@ function PinSheet({
           نسيت الرقم السري؟
         </button>
 
-        <div className="mt-auto grid w-full max-w-[320px] grid-cols-3 gap-x-5 gap-y-3 pb-10" dir="ltr">
+        <div className="mt-auto grid w-full max-w-[340px] grid-cols-3 gap-x-6 gap-y-4 pb-10" dir="ltr">
           {keys.map((digit) => (
             <button
               key={digit}
               type="button"
               onClick={() => press(digit)}
-              className="grid size-[64px] place-items-center justify-self-center rounded-full bg-white text-[24px] font-medium shadow-sm transition-transform active:scale-95"
+              className="grid size-[72px] place-items-center justify-self-center rounded-full bg-white text-[28px] font-medium shadow-sm transition-transform active:scale-95"
             >
               {digit}
             </button>
@@ -422,7 +422,7 @@ function PinSheet({
           <button
             type="button"
             onClick={() => press("0")}
-            className="grid size-[64px] place-items-center justify-self-center rounded-full bg-white text-[24px] font-medium shadow-sm transition-transform active:scale-95"
+            className="grid size-[72px] place-items-center justify-self-center rounded-full bg-white text-[28px] font-medium shadow-sm transition-transform active:scale-95"
           >
             0
           </button>
@@ -430,9 +430,9 @@ function PinSheet({
             type="button"
             aria-label="مسح"
             onClick={() => setPin((value) => value.slice(0, -1))}
-            className="grid size-[64px] place-items-center justify-self-center rounded-full text-foreground transition-transform active:scale-95"
+            className="grid size-[72px] place-items-center justify-self-center rounded-full text-foreground transition-transform active:scale-95"
           >
-            <Delete size={28} />
+            <Delete size={32} />
           </button>
         </div>
       </div>
