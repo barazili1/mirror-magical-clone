@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Bell, ChevronLeft, Delete, Gift, Smartphone, X } from "lucide-react";
+import { Bell, ChevronLeft, Delete, Eye, EyeOff, Gift, Smartphone, X } from "lucide-react";
 import { type SVGProps, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -193,7 +193,7 @@ function Index() {
 
         <div className="mt-[10px] flex items-center justify-between">
           <p className="text-[18px]">
-            أهلاً، <strong className="font-extrabold">هيبه</strong>
+            أهلاً، <strong className="font-extrabold">كريم</strong>
           </p>
           <div className="flex items-center gap-1.5 rounded-full bg-primary-foreground/20 px-3 py-1 text-[12px]">
             <span>
@@ -212,12 +212,12 @@ function Index() {
                   : "text-[20px] font-bold blur-[7px] select-none"
               }
             >
-              ٢,٤٥٠٫٠٠ ج.م
+              ٧٠,٠٠٠٫٠٠ ج.م
             </span>
             <div className="flex items-center gap-6">
               <Button
                 variant="ghost"
-                aria-label="إظهار الرصيد"
+                aria-label={balanceVisible ? "إخفاء الرصيد" : "إظهار الرصيد"}
                 onClick={() => {
                   if (balanceVisible) {
                     setBalanceVisible(false);
@@ -226,7 +226,7 @@ function Index() {
                   }
                 }}
               >
-                <EyeIcon className="size-6" />
+                {balanceVisible ? <Eye className="size-6" /> : <EyeOff className="size-6" />}
               </Button>
               <span className="h-7 w-px bg-primary-foreground/30" />
               <Button variant="ghost" aria-label="مسح رمز">
