@@ -3,12 +3,12 @@ import { Bell, ChevronLeft, Gift, Smartphone, X } from "lucide-react";
 import { type SVGProps, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import electricSahlIcon from "@/assets/icon-electric-sahl.png";
-import electricIcon from "@/assets/icon-electric.png";
-import gasNewIcon from "@/assets/icon-gas-new.png";
-import gasIcon from "@/assets/icon-gas.png";
+import electricSahlIcon from "@/assets/icon-electric-sahl.asset.json";
+import electricIcon from "@/assets/icon-electric.asset.json";
+import gasNewIcon from "@/assets/icon-gas-new.asset.json";
+import gasIcon from "@/assets/icon-gas.asset.json";
 import offerBanner from "@/assets/offer-banner.jpg";
-import prosecutionIcon from "@/assets/icon-prosecution.png";
+import prosecutionIcon from "@/assets/icon-prosecution.asset.json";
 
 // No head() here: the home route inherits title/description/og/twitter from
 // __root.tsx, and ships no og:image so serve-time hosting can inject the
@@ -149,11 +149,11 @@ const shortcuts = [
 ];
 
 const services = [
-  { label: "النيابة العامة", img: prosecutionIcon },
-  { label: "كارت الكهرباء", img: electricSahlIcon },
-  { label: "كارت الغاز", img: gasNewIcon },
-  { label: "كهرباء", img: electricIcon },
-  { label: "غاز", img: gasIcon },
+  { label: "النيابة العامة", img: prosecutionIcon.url },
+  { label: "كارت الكهرباء", img: electricSahlIcon.url },
+  { label: "كارت الغاز", img: gasNewIcon.url },
+  { label: "كهرباء", img: electricIcon.url },
+  { label: "غاز", img: gasIcon.url },
 ];
 
 function Index() {
