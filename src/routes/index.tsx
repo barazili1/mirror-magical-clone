@@ -331,6 +331,25 @@ function Index() {
         </div>
       )}
 
+      {transferLoading && (
+        <div className="fixed inset-0 z-40 mx-auto grid max-w-[430px] place-items-center bg-black/40">
+          <svg
+            className="size-14 animate-spin text-white"
+            viewBox="0 0 48 48"
+            fill="none"
+            aria-label="جاري التحميل"
+          >
+            <circle cx="24" cy="24" r="20" stroke="currentColor" strokeOpacity="0.25" strokeWidth="5" />
+            <path
+              d="M44 24a20 20 0 0 0-20-20"
+              stroke="currentColor"
+              strokeWidth="5"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
+      )}
+
       {pinOpen && (
         <PinSheet
           onClose={() => setPinOpen(false)}
