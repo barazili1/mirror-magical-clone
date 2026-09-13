@@ -159,6 +159,7 @@ const services = [
 function Index() {
   const [toastVisible, setToastVisible] = useState(true);
   const [balanceVisible, setBalanceVisible] = useState(false);
+  const [pinOpen, setPinOpen] = useState(false);
 
   return (
     <main
@@ -216,9 +217,15 @@ function Index() {
               <Button
                 variant="ghost"
                 aria-label="إظهار الرصيد"
-                onClick={() => setBalanceVisible((value) => !value)}
+                onClick={() => {
+                  if (balanceVisible) {
+                    setBalanceVisible(false);
+                  } else {
+                    setPinOpen(true);
+                  }
+                }}
               >
-                <EyeIcon className="size-8" />
+                <EyeIcon className="size-6" />
               </Button>
               <span className="h-7 w-px bg-primary-foreground/30" />
               <Button variant="ghost" aria-label="مسح رمز">
@@ -310,6 +317,16 @@ function Index() {
           </Button>
           <strong className="flex-1 text-center text-[14px]">لا يوجد فواتير مستحقة</strong>
         </div>
+      )}
+
+      {pinOpen && (
+        <PinSheet
+          onClose={() => setPinOpen(false)}
+          onComplete={() => {
+            setPinOpen(false);
+            setBalanceVisible(true);
+          }}
+        />
       )}
 
       <nav
