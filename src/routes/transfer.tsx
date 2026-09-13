@@ -37,6 +37,13 @@ function ContactBookIcon(props: SVGProps<SVGSVGElement>) {
 
 function TransferPage() {
   const [phone, setPhone] = useState("");
+  const [amount, setAmount] = useState("");
+  const showAmount = phone.length === 11;
+
+  const addAmount = (value: number) => {
+    const current = amount === "" ? 0 : parseFloat(amount);
+    setAmount(String(current + value));
+  };
 
   return (
     <main dir="rtl" className="mx-auto flex h-dvh max-w-[430px] flex-col bg-[#f2f2f4] text-foreground shadow-2xl">
@@ -67,15 +74,70 @@ function TransferPage() {
           <ContactBookIcon className="size-[30px] shrink-0 text-alert" />
         </label>
 
-        <div className="mt-4 rounded-[18px] bg-white p-2.5">
-          <div className="flex flex-col items-center rounded-[14px] bg-[#f2f2f4] px-6 py-8 text-center">
-            <Star size={34} strokeWidth={1.6} className="mb-3" />
-            <p className="text-[15px]">زود أرقامك المفضلة هنا علشان تلاقيهم بسهولة !</p>
-            <button type="button" className="mt-2 text-[16px] font-bold text-alert">
-              زود رقم مفضل
-            </button>
+        {showAmount && (
+          <div className="mt-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <div className="mb-2 flex items-center justify-between px-1">
+              <span className="text-[17px] font-extrabold">مبلغ</span>
+              <button type="button" className="flex items-center gap-1 text-[14px] font-bold text-foreground/60">
+                الرسوم
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} className="size-[18px]">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="rounded-[18px] bg-white p-4">
+              <label className="flex items-center justify-center gap-2 pb-4">
+                <span className="text-[22px] font-black">جنيه</span>
+                <span className="size-2 rounded-full bg-[#5aa8b5]" />
+                <input
+                  type="tel"
+                  inputMode="numeric"
+                  dir="rtl"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value.replace(/\D/g, ""))}
+                  placeholder=""
+                  className="w-[120px] bg-transparent text-center text-[22px] font-black outline-none"
+                />
+              </label>
+
+              <div className="grid grid-cols-3 gap-2 pb-3">
+                {[50, 100, 200].map((value) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => addAmount(value)}
+                    className="flex h-[42px] items-center justify-center gap-1 rounded-full border border-foreground/20 text-[14px] font-bold"
+                  >
+                    <span className="text-alert">+</span>
+                    <span>{value}</span>
+                    <span className="text-[12px]">جنيه</span>
+                  </button>
+                ))}
+              </div>
+
+              <p className="text-center text-[13px] text-foreground/60">
+                المبلغ المسموح به من 0 جنيه إلى ٦٠٠٠٠ جنيه
+              </p>
+            </div>
           </div>
-        </div>
+        )}
+
+        {!showAmount && (
+          <div className="mt-4 rounded-[18px] bg-white p-2.5">
+            <div className="flex flex-col items-center rounded-[14px] bg-[#f2f2f4] px-6 py-8 text-center">
+              <Star size={34} strokeWidth={1.6} className="mb-3" />
+              <p className="text-[15px]">زود أرقامك المفضلة هنا علشان تلاقيهم بسهولة !</p>
+              <button type="button" className="mt-2 text-[16px] font-bold text-alert">
+                زود رقم مفضل
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="px-4 pb-8">
