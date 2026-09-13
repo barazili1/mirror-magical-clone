@@ -259,6 +259,7 @@ function Index() {
                 variant="round"
                 size="shortcut"
                 aria-label={typeof label === "string" ? label : "خدمة"}
+                onClick={index === 0 ? goToTransfer : undefined}
               >
                 <Icon className="size-8" />
               </Button>
@@ -348,7 +349,7 @@ function Index() {
           <Smartphone size={24} />
           <span className="mt-1 text-[11px] font-bold">المحفظة</span>
         </Button>
-        <Button variant="nav" size="nav">
+        <Button variant="nav" size="nav" onClick={goToTransfer}>
           <TransferIcon className="size-7" />
           <span className="mt-1 text-[11px]">تحويل أموال</span>
         </Button>
