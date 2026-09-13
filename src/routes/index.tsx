@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Bell, ChevronLeft, Delete, Gift, Smartphone, X } from "lucide-react";
+import { Bell, ChevronLeft, Delete, Eye, EyeOff, Gift, Smartphone, X } from "lucide-react";
 import { type SVGProps, useState } from "react";
 
 import { Button } from "@/components/ui/button";
