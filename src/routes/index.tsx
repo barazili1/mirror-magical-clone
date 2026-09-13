@@ -332,21 +332,20 @@ function Index() {
       )}
 
       {transferLoading && (
-        <div className="fixed inset-0 z-40 mx-auto grid max-w-[430px] place-items-center bg-black/40">
+        <div className="fixed inset-0 z-40 mx-auto flex max-w-[430px] flex-col items-center justify-center bg-[#7a7a7a]/90">
           <svg
-            className="size-14 animate-spin text-white"
-            viewBox="0 0 48 48"
+            className="size-[90px] animate-spin text-white"
+            viewBox="0 0 100 100"
             fill="none"
             aria-label="جاري التحميل"
+            style={{ animationDuration: "1.6s" }}
           >
-            <circle cx="24" cy="24" r="20" stroke="currentColor" strokeOpacity="0.25" strokeWidth="5" />
-            <path
-              d="M44 24a20 20 0 0 0-20-20"
-              stroke="currentColor"
-              strokeWidth="5"
-              strokeLinecap="round"
-            />
+            <circle cx="50" cy="50" r="44" stroke="currentColor" strokeWidth="2.5" strokeDasharray="240 36" strokeLinecap="round" />
+            <circle cx="50" cy="50" r="36" stroke="currentColor" strokeWidth="2.5" strokeDasharray="70 12 130 20" strokeLinecap="round" />
+            <circle cx="50" cy="50" r="28" stroke="currentColor" strokeWidth="2.5" strokeDasharray="50 10 40 8 45 22" strokeLinecap="round" />
+            <circle cx="50" cy="50" r="20" stroke="currentColor" strokeWidth="2.5" strokeDasharray="30 8 55 30" strokeLinecap="round" />
           </svg>
+          <p className="mt-6 text-[20px] font-medium text-white">جاري التحميل</p>
         </div>
       )}
 
