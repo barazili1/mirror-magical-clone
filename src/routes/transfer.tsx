@@ -61,18 +61,28 @@ function TransferPage() {
       <div className="flex-1 px-4 pt-5">
         <h2 className="mb-3 text-[21px] font-extrabold">حول إلي</h2>
 
-        <label className="flex h-[64px] items-center gap-3 rounded-[16px] border-2 border-foreground/15 bg-white px-4 transition-colors focus-within:border-[#5aa8b5]">
-          <input
-            type="tel"
-            inputMode="numeric"
-            dir="rtl"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 11))}
-            placeholder="رقم الموبايل"
-            className="h-full flex-1 bg-transparent text-[16px] outline-none placeholder:text-foreground/70"
-          />
-          <ContactBookIcon className="size-[30px] shrink-0 text-alert" />
-        </label>
+        <div className="relative flex h-[72px] items-center rounded-[16px] border border-foreground/10 bg-white px-4">
+          <button
+            type="button"
+            onClick={() => { setPhone(""); setAmount(""; }}
+            className="absolute left-4 top-1/2 grid size-[32px] -translate-y-1/2 place-items-center text-foreground/70"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-5">
+              <path d="M18 6 6 18M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <label className="flex flex-1 flex-col pr-1">
+            <span className="text-[13px] text-foreground/60">رقم الموبايل</span>
+            <input
+              type="tel"
+              inputMode="numeric"
+              dir="rtl"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 11))}
+              className="bg-transparent text-[18px] font-semibold outline-none"
+            />
+          </label>
+        </div>
 
         {showAmount && (
           <div className="mt-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
@@ -91,7 +101,7 @@ function TransferPage() {
             </div>
 
             <div className="rounded-[18px] bg-white p-4">
-              <label className="flex items-center justify-center gap-2 pb-4">
+              <div className="flex items-center justify-center gap-2 pb-5">
                 <span className="text-[22px] font-black">جنيه</span>
                 <span className="size-2 rounded-full bg-[#5aa8b5]" />
                 <input
@@ -100,10 +110,9 @@ function TransferPage() {
                   dir="rtl"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value.replace(/\D/g, ""))}
-                  placeholder=""
                   className="w-[120px] bg-transparent text-center text-[22px] font-black outline-none"
                 />
-              </label>
+              </div>
 
               <div className="grid grid-cols-3 gap-2 pb-3">
                 {[50, 100, 200].map((value) => (
@@ -111,7 +120,7 @@ function TransferPage() {
                     key={value}
                     type="button"
                     onClick={() => addAmount(value)}
-                    className="flex h-[42px] items-center justify-center gap-1 rounded-full border border-foreground/20 text-[14px] font-bold"
+                    className="flex h-[40px] items-center justify-center gap-1 rounded-full border border-foreground/15 bg-white text-[13px] font-bold"
                   >
                     <span className="text-alert">+</span>
                     <span>{value}</span>
