@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Bell, ChevronLeft, Delete, Gift, Smartphone, X, Zap } from "lucide-react";
+import { Bell, ChevronLeft, Delete, Gift, X } from "lucide-react";
 import { type SVGProps, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -101,6 +101,27 @@ function ServicesIcon(props: IconProps) {
       <rect x="6" y="26" width="16" height="16" rx="2" />
       <rect x="26" y="26" width="16" height="16" rx="2" />
       <path d="M14 10v8m-4-4h8M30 14h8M10 34h8m-4-4v8M31 31l6 6m0-6-6 6" />
+    </svg>
+  );
+}
+
+function VodafoneCashLogo(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 70 90"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <rect x="23" y="4" width="24" height="42" rx="5" />
+      <rect x="27" y="10" width="16" height="28" rx="2" />
+      <circle cx="35" cy="40" r="2" fill="currentColor" />
+      <path d="M23 16c-8 2-13 8-11 16 1 5 6 8 10 8" />
+      <path d="M47 16c8 2 13 8 11 16-1 5-6 8-10 8" />
+      <path d="M28 46l7 14 7-14" />
     </svg>
   );
 }
@@ -241,9 +262,9 @@ function Index() {
           </Button>
         </div>
 
-        <div className="mt-[11px] grid grid-cols-4 gap-0" dir="rtl">
+        <div className="mt-[11px] flex justify-center gap-2 px-6" dir="rtl">
           {shortcuts.map(({ label, icon: Icon }, index) => (
-            <div key={index} className="flex flex-col items-center text-center">
+            <div key={index} className="flex w-[72px] flex-col items-center text-center">
               <Button
                 variant="round"
                 size="shortcut"
@@ -300,7 +321,7 @@ function Index() {
             alt="خدمات النيابة العامة دلوقتي في مكان واحد"
             width={1280}
             height={512}
-            className="h-[120px] w-full rounded-[10px] object-cover"
+            className="h-[170px] w-full rounded-[10px] object-cover"
           />
         </div>
       </section>
@@ -380,15 +401,7 @@ function PinSheet({
       />
       <div className="relative flex h-[94%] flex-col items-center rounded-t-[28px] bg-[#f2f2f4] px-6 pt-10 text-foreground">
         <div className="flex flex-col items-center">
-          <div className="relative text-alert">
-            <Smartphone size={52} strokeWidth={1.6} />
-            <Zap
-              size={22}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/3"
-              fill="currentColor"
-              strokeWidth={0}
-            />
-          </div>
+          <VodafoneCashLogo className="size-[70px] text-alert" />
           <span className="mt-1 text-[22px] font-black italic text-alert">كاش</span>
         </div>
 
