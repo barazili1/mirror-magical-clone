@@ -64,7 +64,7 @@ function TransferPage() {
         <div className="relative flex h-[72px] items-center rounded-[16px] border border-foreground/10 bg-white px-4">
           <button
             type="button"
-            onClick={() => { setPhone(""); setAmount(""; }}
+            onClick={() => { setPhone(""); setAmount(""); }}
             className="absolute left-4 top-1/2 grid size-[32px] -translate-y-1/2 place-items-center text-foreground/70"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="size-5">
