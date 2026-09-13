@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Bell, ChevronLeft, Delete, Eye, EyeOff, Gift, Smartphone, X } from "lucide-react";
 import { type SVGProps, useState } from "react";
 
@@ -161,6 +161,16 @@ function Index() {
   const [toastVisible, setToastVisible] = useState(true);
   const [balanceVisible, setBalanceVisible] = useState(false);
   const [pinOpen, setPinOpen] = useState(false);
+  const [transferLoading, setTransferLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const goToTransfer = () => {
+    setTransferLoading(true);
+    setTimeout(() => {
+      setTransferLoading(false);
+      void navigate({ to: "/transfer" });
+    }, 1200);
+  };
 
   return (
     <main
@@ -249,6 +259,7 @@ function Index() {
                 variant="round"
                 size="shortcut"
                 aria-label={typeof label === "string" ? label : "خدمة"}
+                onClick={index === 0 ? goToTransfer : undefined}
               >
                 <Icon className="size-8" />
               </Button>
@@ -320,6 +331,25 @@ function Index() {
         </div>
       )}
 
+      {transferLoading && (
+        <div className="fixed inset-0 z-40 mx-auto grid max-w-[430px] place-items-center bg-black/40">
+          <svg
+            className="size-14 animate-spin text-white"
+            viewBox="0 0 48 48"
+            fill="none"
+            aria-label="جاري التحميل"
+          >
+            <circle cx="24" cy="24" r="20" stroke="currentColor" strokeOpacity="0.25" strokeWidth="5" />
+            <path
+              d="M44 24a20 20 0 0 0-20-20"
+              stroke="currentColor"
+              strokeWidth="5"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
+      )}
+
       {pinOpen && (
         <PinSheet
           onClose={() => setPinOpen(false)}
@@ -338,7 +368,7 @@ function Index() {
           <Smartphone size={24} />
           <span className="mt-1 text-[11px] font-bold">المحفظة</span>
         </Button>
-        <Button variant="nav" size="nav">
+        <Button variant="nav" size="nav" onClick={goToTransfer}>
           <TransferIcon className="size-7" />
           <span className="mt-1 text-[11px]">تحويل أموال</span>
         </Button>
